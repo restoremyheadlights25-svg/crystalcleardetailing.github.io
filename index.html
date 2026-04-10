@@ -1249,7 +1249,7 @@
     }
 
     // Save to Supabase (pending approval)
-    fetch(`${SUPABASE_URL}/rest/v1/reviews`, {
+    fetch(`${SUPABASE_URL}/rest/v1/Reviews`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -1257,7 +1257,7 @@
         'Authorization': `Bearer ${SUPABASE_KEY}`,
         'Prefer': 'return=minimal'
       },
-      body: JSON.stringify({ name, service, rating: selectedRating, review: text, approved: false })
+      body: JSON.stringify({ name: name, service: service, rating: selectedRating, review: text, approved: false })
     }).then(res => {
       if (res.ok || res.status === 201) {
         // Also notify via Web3Forms
@@ -1272,11 +1272,15 @@
         msg.style.display = 'block';
         setTimeout(() => msg.style.display = 'none', 5000);
       } else {
-        msg.textContent = '⚠ Something went wrong. Please try again.';
-        msg.style.color = '#e07070';
-        msg.style.display = 'block';
+        res.text().then(errText => {
+          console.error('Supabase error:', res.status, errText);
+          msg.textContent = `⚠ Error ${res.status}: ${errText}`;
+          msg.style.color = '#e07070';
+          msg.style.display = 'block';
+        });
       }
-    }).catch(() => {
+    }).catch(err => {
+      console.error('Network error:', err);
       msg.textContent = '⚠ Connection error. Please try again.';
       msg.style.color = '#e07070';
       msg.style.display = 'block';
@@ -1302,11 +1306,11 @@
 
   // ── SEED REVIEWS (your real verified reviews, always shown) ──
   const seedReviews = [
-    { name: 'Michael D.', service: 'Headlight Restoration', rating: 5, text: '"This man cleans headlights like there is no tomorrow. Super fast, super nice, and my headlights are BEAST MODE now."' },
-    { name: 'Christopher R.', service: 'Detailing', rating: 5, text: '"Set my car back YEARS. Amazing prices and incredible work. Highly recommend."' },
-    { name: 'Escola', service: 'Headlight Restoration', rating: 5, text: '"Did my headlights months ago and they STILL look good."' },
-    { name: 'Mr. Man', service: 'Headlight Restoration', rating: 5, text: '"Didn\'t know what to expect… but the difference was insane."' },
-    { name: 'CluEngineer', service: 'Detailing', rating: 5, text: '"Solid work and decent prices."' },
+    { name: 'Michael D.', service: 'Headlight Restoration', rating: 5, review: 'This man cleans headlights like there is no tomorrow. Super fast, super nice, and my headlights are BEAST MODE now.' },
+    { name: 'Christopher R.', service: 'Detailing', rating: 5, review: 'Set my car back YEARS. Amazing prices and incredible work. Highly recommend.' },
+    { name: 'Escola', service: 'Headlight Restoration', rating: 5, review: 'Did my headlights months ago and they STILL look good.' },
+    { name: 'Mr. Man', service: 'Headlight Restoration', rating: 5, review: 'Didn\'t know what to expect… but the difference was insane.' },
+    { name: 'CluEngineer', service: 'Detailing', rating: 5, review: 'Solid work and decent prices.' },
   ];
 
   function renderStars(n) {
@@ -1316,10 +1320,14 @@
   function buildCard(r, delay) {
     const card = document.createElement('div');
     card.className = `review-card reveal reveal-delay-${delay}`;
+    const name = r.name;
+    const service = r.service;
+    const rating = r.rating;
+    const reviewText = (r.review || r.text || '').replace(/^"|"$/g, '');
     card.innerHTML = `
-      <div class="review-stars">${renderStars(r.rating)}</div>
-      <div class="review-text">"${r.review || r.text}"</div>
-      <div class="review-author">${r.name} — <span>${r.service}</span></div>
+      <div class="review-stars">${renderStars(rating)}</div>
+      <div class="review-text">"${reviewText}"</div>
+      <div class="review-author">${name} — <span>${service}</span></div>
     `;
     return card;
   }
@@ -1332,7 +1340,7 @@
     // Fetch approved reviews from Supabase
     let approvedReviews = [];
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/reviews?approved=eq.true&order=id.asc`, {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/Reviews?approved=eq.true&order=id.asc`, {
         headers: {
           'apikey': SUPABASE_KEY,
           'Authorization': `Bearer ${SUPABASE_KEY}`
