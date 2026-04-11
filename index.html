@@ -574,6 +574,94 @@
   .social-icon:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
   .social-icon svg { width: 16px; height: 16px; fill: currentColor; }
 
+  /* ── SERVICE NAV BUTTONS ── */
+  .service-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .service-nav-btn {
+    position: relative; overflow: hidden;
+    min-height: 480px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column; justify-content: center;
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .service-nav-btn:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .service-nav-btn:hover .service-nav-bg { opacity: 1; }
+  .service-nav-btn:hover .service-nav-arrow { transform: translateX(6px); color: var(--gold); }
+  .featured-btn {
+    border-color: var(--gold);
+    min-height: 480px;
+  }
+  .featured-btn .service-nav-bg { opacity: 0.6; }
+  .service-nav-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .featured-btn::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--gold);
+  }
+  .service-nav-content {
+    position: relative; z-index: 1;
+    padding: 2.5rem;
+    display: flex; flex-direction: column; gap: 0.6rem;
+    align-items: center; text-align: center;
+  }
+  .service-nav-num {
+    font-family: var(--font-display);
+    font-size: 1rem; letter-spacing: 0.3em;
+    color: var(--gold); opacity: 0.7;
+  }
+  .service-nav-name {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    letter-spacing: 0.04em; line-height: 1;
+    color: var(--white);
+  }
+  .service-nav-sub {
+    font-family: var(--font-serif);
+    font-size: 0.95rem; font-style: italic;
+    color: var(--muted); margin-top: 0.4rem;
+  }
+  .service-nav-price {
+    font-size: 0.75rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold);
+    opacity: 0.85; margin-top: 0.3rem;
+  }
+  .service-nav-arrow {
+    font-size: 1.4rem; color: var(--muted);
+    margin-top: 1.5rem;
+    transition: transform 0.3s, color 0.3s;
+    display: inline-block;
+  }
+  /* Coming soon overlay */
+  .coming-soon-btn { cursor: pointer; }
+  .coming-soon-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    background: rgba(10,10,10,0.88);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .coming-soon-btn:hover .coming-soon-overlay,
+  .coming-soon-overlay.show { opacity: 1; }
+  .coming-soon-text {
+    font-family: var(--font-display);
+    font-size: 2rem; letter-spacing: 0.2em;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 1rem 2rem;
+  }
+  @media (max-width: 768px) {
+    .service-nav-grid { grid-template-columns: 1fr; }
+    .service-nav-btn { min-height: 200px; }
+  }
+
   /* ── FLEET ── */
   #fleet { padding: 8rem 4rem; }
   .fleet-layout { }
@@ -712,7 +800,8 @@
   <div class="nav-logo">CRYSTAL CLEAR</div>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
-    <li><a href="#fleet">Fleet</a></li>
+    <li><a href="detailing.html">Detailing</a></li>
+    <li><a href="fleet.html">Fleet</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#leave-review">Leave a Review</a></li>
@@ -781,119 +870,48 @@
       <div class="section-label">What We Offer</div>
       <h2 class="section-title">OUR<br>SERVICES</h2>
     </div>
-    <p class="section-intro">Every package is tailored. Every visit is white-glove. No rush, no shortcuts.</p>
+    <p class="section-intro">Select a category below to explore our full range of services.</p>
   </div>
-  <div class="services-grid">
-    <div class="service-card reveal reveal-delay-1">
-      <div class="service-num">01</div>
-      <div class="service-name">Stage 1</div>
-      <ul class="service-list">
-        <li>Exterior hand wash & dry</li>
-        <li>Wheel & tire cleaning/dressing</li>
-        <li>Windows cleaned (interior & exterior)</li>
-        <li>Interior vacuum (seats, floors, trunk)</li>
-        <li>Wipe down of dash, console & door panels</li>
-        <li>Air freshener</li>
-      </ul>
-      <div class="service-price">Starting at $130</div>
-      <a href="#booking" class="service-book-btn" onclick="preselectService('Stage 1 — from $130')">Book Stage 1 →</a>
-    </div>
-    <div class="service-card reveal reveal-delay-2">
-      <div class="service-num">02</div>
-      <div class="service-name">Stage 2</div>
-      <ul class="service-list">
-        <li>Everything in Stage 1, plus:</li>
-        <li>Door jambs cleaned</li>
-        <li>Clay bar decontamination</li>
-        <li>Foaming Protector Wax (3–6 months)</li>
-        <li>Trim dressing (exterior plastic & rubber)</li>
-        <li>Light stain removal (carpets & upholstery)</li>
-        <li>Leather or vinyl conditioning</li>
-      </ul>
-      <div class="service-price">Starting at $200</div>
-      <a href="#booking" class="service-book-btn" onclick="preselectService('Stage 2 — from $200')">Book Stage 2 →</a>
-    </div>
-    <div class="service-card reveal reveal-delay-3">
-      <div class="service-num">03</div>
-      <div class="service-name">Stage 3</div>
-      <ul class="service-list">
-        <li>Everything in Stages 1 & 2, plus:</li>
-        <li>Iron decontamination</li>
-        <li>Ceramic Spray Sealant (6–12 months)</li>
-        <li>Heavy stain removal and extraction</li>
-      </ul>
-      <div class="service-price">Starting at $350</div>
-      <a href="#booking" class="service-book-btn" onclick="preselectService('Stage 3 — from $350')">Book Stage 3 →</a>
-    </div>
-    <div class="service-card reveal reveal-delay-1">
-      <div class="service-num">04</div>
-      <div class="service-name">Stage 4</div>
-      <ul class="service-list">
-        <li>Everything in Stages 1–3, plus:</li>
-        <li>2-step paint correction</li>
-        <li>Ceramic coating</li>
-      </ul>
-      <div class="service-price">Starting at $700</div>
-      <a href="#booking" class="service-book-btn" onclick="preselectService('Stage 4 — from $700')">Book Stage 4 →</a>
-    </div>
-    <div class="service-card reveal reveal-delay-2">
-      <div class="service-num">05</div>
-      <div class="service-name">Headlight Restoration</div>
-      <ul class="service-list">
-        <li>Removes oxidation & yellowing</li>
-        <li>Restores clarity & brightness</li>
-        <li>Improves nighttime visibility</li>
-        <li>Long-lasting protection</li>
-      </ul>
-      <div class="service-price">Starting at $50</div>
-      <a href="#booking" class="service-book-btn" onclick="preselectService('Headlight Restoration — from $50')">Book Headlights →</a>
-    </div>
-    <div class="service-card reveal reveal-delay-3 why-us-card">
-      <div class="service-num" style="color:var(--gold);opacity:0.4;">✦</div>
-      <div class="service-name">Why Crystal Clear?</div>
-      <ul class="service-list">
-        <li><span style="color:var(--white);">⚡ Fast</span> — most jobs done in under an hour</li>
-        <li><span style="color:var(--white);">💰 Affordable</span> — premium results, fair prices</li>
-        <li><span style="color:var(--white);">🔥 Dramatic results</span> — transformations that speak for themselves</li>
-        <li><span style="color:var(--white);">🤝 Friendly</span> — customers keep coming back</li>
-        <li><span style="color:var(--white);">🛡️ Long-lasting</span> — finishes that hold up for months</li>
-        <li><span style="color:var(--white);">📍 Mobile</span> — we come to you, anywhere in Kings County</li>
-      </ul>
-    </div>
-  </div>
-</section>
+  <div class="service-nav-grid reveal reveal-delay-1">
 
-<!-- FLEET & CORPORATE -->
-<section id="fleet" style="background: var(--deep); position: relative; overflow: hidden;">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 80% 50%, rgba(201,168,76,0.06) 0%, transparent 65%);"></div>
-  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index:1;" class="fleet-layout">
-    <div class="reveal">
-      <div class="section-label">Business Solutions</div>
-      <h2 class="section-title">FLEET &<br>CORPORATE</h2>
-      <p style="font-family:var(--font-serif); font-size:1.15rem; font-style:italic; color:var(--white); line-height:1.8; margin-bottom:2rem;">
-        Recurring maintenance programs built around your operation. From dealerships to rental fleets, we keep your vehicles looking sharp on a schedule that works for you.
-      </p>
-      <ul class="fleet-list">
-        <li>Recurring maintenance programs</li>
-        <li>Dealerships, rental fleets & corporate vehicles</li>
-        <li>Priority scheduling</li>
-        <li>Custom pricing per fleet size</li>
-      </ul>
-    </div>
-    <div class="reveal reveal-delay-2">
-      <div class="fleet-card">
-        <div class="fleet-card-label">Custom Pricing</div>
-        <div class="fleet-card-title">Let's Talk Fleet</div>
-        <p style="font-size:0.88rem; color:var(--muted); line-height:1.8; margin-bottom:2rem;">Every fleet is different. Tell us about your vehicles and we'll build a plan around your needs and budget.</p>
-        <div class="fleet-perks">
-          <div class="fleet-perk"><span><span style="display:inline-block;width:18px;height:18px;background:var(--gold);border-radius:0;flex-shrink:0;margin-top:2px;"></span></span> Priority scheduling</div>
-          <div class="fleet-perk"><span><span style="display:inline-block;width:18px;height:18px;background:var(--gold);border-radius:0;flex-shrink:0;margin-top:2px;"></span></span> Volume pricing</div>
-          <div class="fleet-perk"><span><span style="display:inline-block;width:18px;height:18px;background:var(--gold);border-radius:0;flex-shrink:0;margin-top:2px;"></span></span> Recurring service</div>
-          <div class="fleet-perk"><span><span style="display:inline-block;width:18px;height:18px;background:var(--gold);border-radius:0;flex-shrink:0;margin-top:2px;"></span></span> We come to you</div>
-        </div>
-        <a href="#booking" class="service-book-btn" style="margin-top:2rem;" onclick="preselectService('Fleet / Corporate — Custom Quote')">Get a Custom Quote →</a>
+    <!-- CERAMIC COATINGS — Coming Soon -->
+    <div class="service-nav-btn coming-soon-btn" onclick="showComingSoon()">
+      <div class="service-nav-bg"></div>
+      <div class="service-nav-content">
+        <div class="service-nav-num">01</div>
+        <div class="service-nav-name">Ceramic<br>Coatings</div>
+        <div class="service-nav-sub">Protection that lasts years</div>
+        <div class="service-nav-arrow">→</div>
+      </div>
+      <div class="coming-soon-overlay" id="coming-soon-overlay">
+        <div class="coming-soon-text">Coming Soon</div>
       </div>
     </div>
+
+    <!-- DETAILING PACKAGES — center, featured -->
+    <a href="detailing.html" class="service-nav-btn featured-btn">
+      <div class="service-nav-bg"></div>
+      <div class="service-nav-content">
+        <div class="service-nav-num">02</div>
+        <div class="service-nav-name">Detailing<br>Packages</div>
+        <div class="service-nav-sub">Stage 1 – 3 & Headlights</div>
+        <div class="service-nav-price">Starting at $150 / Vehicle</div>
+        <div class="service-nav-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- FLEET & CORPORATE -->
+    <a href="fleet.html" class="service-nav-btn">
+      <div class="service-nav-bg"></div>
+      <div class="service-nav-content">
+        <div class="service-nav-num">03</div>
+        <div class="service-nav-name">Fleet &<br>Corporate</div>
+        <div class="service-nav-sub">Volume pricing & recurring service</div>
+        <div class="service-nav-price">Starting at $100 / Vehicle</div>
+        <div class="service-nav-arrow">→</div>
+      </div>
+    </a>
+
   </div>
 </section>
 
@@ -1077,11 +1095,14 @@
           <label>Service</label>
           <select name="service" required>
             <option value="">Select a service...</option>
-            <option>Stage 1 — from $130</option>
-            <option>Stage 2 — from $200</option>
-            <option>Stage 3 — from $350</option>
-            <option>Stage 4 — from $700</option>
             <option>Headlight Restoration — from $50</option>
+            <option>Stage 1 — Surface Detail ($150–$185)</option>
+            <option>Stage 2 — Deep Clean Detail ($250–$285)</option>
+            <option>Stage 3 — Restoration Detail ($350–$385)</option>
+            <option>Maintenance — Biweekly ($60–$95)</option>
+            <option>Maintenance — Monthly ($100–$135)</option>
+            <option>Maintenance — Quarterly ($150–$185)</option>
+            <option>Maintenance — Biannually ($200–$235)</option>
             <option>Fleet / Corporate — Custom Quote</option>
           </select>
         </div>
@@ -1326,6 +1347,12 @@
       msg.style.color = '#e07070';
       msg.style.display = 'block';
     });
+  }
+
+  function showComingSoon() {
+    const overlay = document.getElementById('coming-soon-overlay');
+    overlay.classList.add('show');
+    setTimeout(() => overlay.classList.remove('show'), 2000);
   }
 
   function preselectService(value) {
