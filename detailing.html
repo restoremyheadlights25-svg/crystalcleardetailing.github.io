@@ -151,6 +151,17 @@
   .social-icon:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.1); }
 
 
+
+  /* NAV LINKS */
+  .nav-links { display: flex; gap: 1.4rem; list-style: none; align-items: center; flex-wrap: nowrap; }
+  .nav-links a {
+    color: var(--white); opacity: 0.85;
+    text-decoration: none; font-size: 0.7rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    transition: opacity 0.2s, color 0.2s; white-space: nowrap;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
   /* QUICK TABS */
   .quick-tabs {
     display: flex; gap: 0; border: 1px solid var(--border);
@@ -189,8 +200,13 @@
 
 <nav>
   <a href="./index.html" class="nav-logo">CRYSTAL CLEAR</a>
-  <a href="./index.html" class="nav-back">← Back to Home</a>
-  <a href="#booking" class="nav-cta">Book Your Detail</a>
+  <ul class="nav-links">
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#maintenance">Maintenance</a></li>
+    <li><a href="#addons">Add-Ons</a></li>
+    <li><a href="./index.html">← Home</a></li>
+    <li><a href="#booking" class="nav-cta">Book Your Detail</a></li>
+  </ul>
 </nav>
 
 <!-- HERO -->
@@ -199,11 +215,7 @@
   <div class="page-eyebrow">Crystal Clear Headlights & Detailing</div>
   <h1 class="page-title">DETAILING<br><span>PACKAGES</span></h1>
   <p class="page-subtitle">Every stage is a complete service. Choose the level of care your vehicle deserves — or keep it maintained year-round.</p>
-  <div class="quick-tabs">
-    <a href="#packages" class="quick-tab active">Packages</a>
-    <a href="#maintenance" class="quick-tab">Maintenance</a>
-    <a href="#addons" class="quick-tab">Add-Ons</a>
-  </div>
+
 </div>
 
 <!-- ── DETAIL PACKAGES ── -->
@@ -230,7 +242,7 @@
         <li>Wheel & tire cleaning + dressing</li>
       </ul>
       <div class="package-price">$150 – $185</div>
-      <a href="./index.html#booking" class="book-btn">Book Stage 1 →</a>
+      <a href="#booking" class="book-btn">Book Stage 1 →</a>
     </div>
 
     <div class="package-card reveal reveal-delay-2">
@@ -253,7 +265,7 @@
         <li>Wheel & tire cleaning + dressing</li>
       </ul>
       <div class="package-price">$250 – $285</div>
-      <a href="./index.html#booking" class="book-btn">Book Stage 2 →</a>
+      <a href="#booking" class="book-btn">Book Stage 2 →</a>
     </div>
 
     <div class="package-card reveal reveal-delay-3">
@@ -278,7 +290,7 @@
         <li>Graphene Ceramic Spray Coating (6–18 month longevity)</li>
       </ul>
       <div class="package-price">$350 – $385</div>
-      <a href="./index.html#booking" class="book-btn">Book Stage 3 →</a>
+      <a href="#booking" class="book-btn">Book Stage 3 →</a>
     </div>
 
   </div>
@@ -311,7 +323,7 @@
         <li>Protector Wax (3–6 month longevity)</li>
       </ul>
       <div class="package-price">$50 – $85 / visit</div>
-      <a href="./index.html#booking" class="book-btn">Book Biweekly →</a>
+      <a href="#booking" class="book-btn">Book Biweekly →</a>
     </div>
 
     <div class="package-card reveal reveal-delay-2">
@@ -332,7 +344,7 @@
         <li>Protector Wax (3–6 month longevity)</li>
       </ul>
       <div class="package-price">$100 – $135 / visit</div>
-      <a href="./index.html#booking" class="book-btn">Book Monthly →</a>
+      <a href="#booking" class="book-btn">Book Monthly →</a>
     </div>
   </div>
 
@@ -357,7 +369,7 @@
         <li>Protector Wax</li>
       </ul>
       <div class="package-price">$150 – $185 / visit</div>
-      <a href="./index.html#booking" class="book-btn">Book Quarterly →</a>
+      <a href="#booking" class="book-btn">Book Quarterly →</a>
     </div>
 
     <div class="package-card reveal reveal-delay-2">
@@ -380,7 +392,7 @@
         <li>Protector Wax (3–6 month longevity)</li>
       </ul>
       <div class="package-price">$200 – $235 / visit</div>
-      <a href="./index.html#booking" class="book-btn">Book Biannually →</a>
+      <a href="#booking" class="book-btn">Book Biannually →</a>
     </div>
 
     <div class="package-card reveal reveal-delay-3" style="background:var(--black);border-color:var(--gold);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2.5rem;">
@@ -418,7 +430,7 @@
       <div style="font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Starting At</div>
       <div style="font-family:var(--font-display);font-size:4rem;color:var(--gold);line-height:1;">$50</div>
       <div style="font-size:0.75rem;color:var(--muted);margin-bottom:1.5rem;margin-top:0.3rem;">per vehicle</div>
-      <a href="./index.html#booking" class="book-btn" style="display:inline-block;padding:0.8rem 2rem;">Book Now →</a>
+      <a href="#booking" class="book-btn" style="display:inline-block;padding:0.8rem 2rem;">Book Now →</a>
     </div>
   </div>
 
