@@ -587,5 +587,31 @@
       });
   }
 </script>
+<script>
+  // Scroll to hash on page load with nav offset
+  window.addEventListener('load', () => {
+    if (window.location.hash) {
+      setTimeout(() => {
+        const el = document.querySelector(window.location.hash);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 90;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  });
+
+  // Smooth scroll for all same-page anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
 </body>
 </html>

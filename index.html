@@ -1150,7 +1150,7 @@
         <div class="contact-icon"><span style="display:inline-block;width:18px;height:18px;background:var(--gold);border-radius:0;flex-shrink:0;margin-top:2px;"></span></div>
         <div>
           <div class="contact-label">Email</div>
-          <div class="contact-value"><a href="/cdn-cgi/l/email-protection#1d6f786e69726f78706475787c7971747a75696e2f285d7a707c7471337e7270" style="color:var(--white);text-decoration:none;"><span class="__cf_email__" data-cfemail="9eecfbedeaf1ecfbf3e7f6fbfffaf2f7f9f6eaedacabdef9f3fff7f2b0fdf1f3">[email&#160;protected]</span></a></div>
+          <div class="contact-value"><a href="mailto:restoremyheadlights25@gmail.com" style="color:var(--white);text-decoration:none;">restoremyheadlights25@gmail.com</a></div>
         </div>
       </div>
       <div class="contact-item">
@@ -1492,6 +1492,21 @@
   setTimeout(() => {
     document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
   }, 100);
+
+
+  // Scroll to hash on page load with nav offset
+  window.addEventListener('load', () => {
+    if (window.location.hash) {
+      setTimeout(() => {
+        const el = document.querySelector(window.location.hash);
+        if (el) {
+          const offset = 90;
+          const top = el.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  });
 
   // Smooth active nav highlight
   const sections = document.querySelectorAll('section[id]');
